@@ -1,13 +1,13 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBasketShopping } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./Header.module.css";
 import COLORS from "../../constants/colors";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBasketShopping } from "@fortawesome/free-solid-svg-icons";
+
+const { headerContainer, headerTitle, headerIcon } = styles;
 
 const Header = () => {
-  const { headerContainer, headerTitle, headerIcon } = styles;
-
   return (
     <div className={headerContainer}>
       <FontAwesomeIcon

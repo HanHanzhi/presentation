@@ -1,0 +1,23 @@
+.navContainer {
+  width: 150px;
+  display: flex;
+  justify-content: space-around;
+  align-self: flex-end;
+  margin-top: 60px;
+}
+
+.navIcon {
+  font-size: 40px;
+}
+
+.navBtnEnabled {
+  color: #4e514f;
+}
+
+.navBtnEnabled:hover {
+  cursor: default;
+}
+
+.navBtnDisabled {
+  color: #c7ccc7;
+}

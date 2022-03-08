@@ -1,0 +1,15 @@
+.headerContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.headerTitle {
+  font-size: 100px;
+  filter: drop-shadow(0px 4px 3px #bfbfbf);
+}
+
+.headerIcon {
+  font-size: 100px;
+  margin-right: 24px;
+}

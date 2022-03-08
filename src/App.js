@@ -1,9 +1,11 @@
 import "./App.css";
 
+import Header from "./components/layout/Header";
+
 const App = () => {
   return (
-    <div>
-      <p>My App</p>
+    <div id="appContainer">
+      <Header />
     </div>
   );
 };

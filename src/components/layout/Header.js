@@ -12,7 +12,7 @@ const Header = () => {
     <div className={headerContainer}>
       <FontAwesomeIcon
         icon={faBasketShopping}
-        color={COLORS.rfGREEN}
+        color={COLORS.PRIMARY_GREEN}
         className={headerIcon}
       />
       <p className={headerTitle}>Recipe Finder</p>

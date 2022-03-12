@@ -1,5 +1,5 @@
 const COLORS = {
-  rfGREEN: "#1CD22E",
+  PRIMARY_GREEN: "#1CD22E",
 };
 
 export default COLORS;

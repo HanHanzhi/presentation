@@ -1,0 +1,8 @@
+.ingredientListContainer {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  margin: 14px 0 0 15px;
+  row-gap: 15px;
+  column-gap: 30px;
+}

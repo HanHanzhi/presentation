@@ -11,6 +11,7 @@ const {
   ingredientForm,
   ingredientSubmitBtn,
   disabled,
+  searchBtn,
 } = styles;
 
 const Searchbar = () => {
@@ -53,6 +54,7 @@ const Searchbar = () => {
         ingredientList={ingredientList}
         setIngredientList={setIngredientList}
       />
+      <button className={searchBtn}>Search</button>
     </div>
   );
 };

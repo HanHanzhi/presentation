@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import RecipeContext from "../../../context/recipes/RecipeContext";
 
 import styles from "./Searchbar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,11 +19,18 @@ const Searchbar = () => {
   const [ingredientText, setIngredientText] = useState("");
   const [ingredientList, setIngredientList] = useState([]);
 
+  const recipeContext = useContext(RecipeContext);
+  const { getRecipes } = recipeContext;
+
   const onSubmit = (e) => {
     e.preventDefault();
     if (!ingredientList.includes(ingredientText))
       setIngredientList([...ingredientList, ingredientText]);
     setIngredientText("");
+  };
+
+  const onSearch = () => {
+    getRecipes(ingredientList);
   };
 
   return (
@@ -54,7 +62,9 @@ const Searchbar = () => {
         ingredientList={ingredientList}
         setIngredientList={setIngredientList}
       />
-      <button className={searchBtn}>Search</button>
+      <button onClick={onSearch} className={searchBtn}>
+        Search
+      </button>
     </div>
   );
 };

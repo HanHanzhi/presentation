@@ -2,7 +2,7 @@ import RecipeState from "./context/recipes/RecipeState";
 
 import Header from "./components/layout/Header";
 import Navbar from "./components/layout/Navbar";
-import Searchbar from "./components/layout/Search/Searchbar";
+import SearchArea from "./components/layout/Search/SearchArea";
 
 import "./App.css";
 
@@ -12,7 +12,7 @@ const App = () => {
       <div className="appContainer">
         <Navbar />
         <Header />
-        <Searchbar />
+        <SearchArea />
       </div>
     </RecipeState>
   );

@@ -7,12 +7,13 @@ import { GET_RECIPES, SET_LOADING, SEARCH_ERROR } from "../types";
 const RecipeState = (props) => {
   const SPOONACULAR_URI = "https://api.spoonacular.com";
   const QUERY_CONSTANTS = {
+    API_KEY: "a7dd53920d654051aea0cf45bf40c70f",
     RESPONSE_NUM: 5,
     RANKING: 1, // Maximize used ingredients (1) or minimize missing ingredients (2)
     IGNORE_PANTRY: true,
   };
   const initialState = {
-    recipes: [],
+    recipes: null,
     isLoading: false,
     searchError: null,
   };
@@ -22,7 +23,7 @@ const RecipeState = (props) => {
   // Get recipes by ingredient list
   const getRecipes = async (ingredients) => {
     const ingredientsStr = ingredients.join();
-    const getRecipeURI = `${SPOONACULAR_URI}/recipes/findByIngredients?ingredients=${ingredientsStr}&number=${QUERY_CONSTANTS.RESPONSE_NUM}&ranking=${QUERY_CONSTANTS.RANKING}&ignorePantry=${QUERY_CONSTANTS.IGNORE_PANTRY}`;
+    const getRecipeURI = `${SPOONACULAR_URI}/recipes/findByIngredients?apiKey=${QUERY_CONSTANTS.API_KEY}&ingredients=${ingredientsStr}&number=${QUERY_CONSTANTS.RESPONSE_NUM}&ranking=${QUERY_CONSTANTS.RANKING}&ignorePantry=${QUERY_CONSTANTS.IGNORE_PANTRY}`;
 
     try {
       setLoading();
@@ -30,7 +31,7 @@ const RecipeState = (props) => {
       dispatch({ type: GET_RECIPES, payload: res.data });
     } catch (err) {
       console.error(err.response);
-      dispatch({ type: SEARCH_ERROR, payload: err.response });
+      dispatch({ type: SEARCH_ERROR, payload: err.response.data.message });
     }
   };
 

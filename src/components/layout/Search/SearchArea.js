@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import RecipeContext from "../../../context/recipes/RecipeContext";
 import IngredientForm from "./IngredientForm";
 
-import styles from "./Searchbar.module.css";
+import styles from "./SearchArea.module.css";
 import IngredientList from "./IngredientList";
 
 const { ingredientSearchContainer, searchBtn } = styles;

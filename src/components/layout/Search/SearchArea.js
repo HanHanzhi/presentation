@@ -28,7 +28,7 @@ const SearchArea = () => {
         setIngredientList={setIngredientList}
       />
       <button onClick={onSearch} className={searchBtn}>
-        Search
+        Serchh
       </button>
     </div>
   );

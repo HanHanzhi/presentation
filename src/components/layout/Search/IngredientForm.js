@@ -27,7 +27,7 @@ const IngredientForm = ({ ingredientList, setIngredientList }) => {
         type="text"
         name="ingredient-search"
         className={ingredientSearch}
-        placeholder="Search ingredients..."
+        placeholder="Search ingraedeients..."
         value={ingredientText}
         onChange={(e) => setIngredientText(e.target.value)}
       />

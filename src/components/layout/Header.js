@@ -15,7 +15,7 @@ const Header = () => {
         color={COLORS.PRIMARY_GREEN}
         className={headerIcon}
       />
-      <p className={headerTitle}>Website Name</p>
+      <p className={headerTitle}>Recipe Finder</p>
     </div>
   );
 };

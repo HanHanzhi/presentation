@@ -15,7 +15,7 @@ const SearchArea = () => {
       <IngredientForm />
       <IngredientList />
       <button onClick={getRecipes} className={searchBtn}>
-        Serchh
+        Search
       </button>
     </div>
   );

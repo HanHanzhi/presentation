@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import RecipeContext from "../../../context/recipes/RecipeContext";
 import IngredientForm from "./IngredientForm";
 
@@ -8,26 +8,13 @@ import IngredientList from "./IngredientList";
 const { ingredientSearchContainer, searchBtn } = styles;
 
 const SearchArea = () => {
-  const [ingredientList, setIngredientList] = useState([]);
-
-  const recipeContext = useContext(RecipeContext);
-  const { getRecipes } = recipeContext;
-
-  const onSearch = () => {
-    getRecipes(ingredientList);
-  };
+  const { getRecipes } = useContext(RecipeContext);
 
   return (
     <div className={ingredientSearchContainer}>
-      <IngredientForm
-        ingredientList={ingredientList}
-        setIngredientList={setIngredientList}
-      />
-      <IngredientList
-        ingredientList={ingredientList}
-        setIngredientList={setIngredientList}
-      />
-      <button onClick={onSearch} className={searchBtn}>
+      <IngredientForm />
+      <IngredientList />
+      <button onClick={getRecipes} className={searchBtn}>
         Serchh
       </button>
     </div>

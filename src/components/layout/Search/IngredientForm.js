@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import RecipeContext from "../../../context/recipes/RecipeContext";
 
 import styles from "./SearchArea.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,13 +8,13 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 const { ingredientSearch, ingredientForm, ingredientSubmitBtn, disabled } =
   styles;
 
-const IngredientForm = ({ ingredientList, setIngredientList }) => {
+const IngredientForm = () => {
   const [ingredientText, setIngredientText] = useState("");
+  const { addIngredient } = useContext(RecipeContext);
 
   const onAddIngredient = (e) => {
     e.preventDefault();
-    if (!ingredientList.includes(ingredientText))
-      setIngredientList([...ingredientList, ingredientText]);
+    addIngredient(ingredientText);
     setIngredientText("");
   };
 

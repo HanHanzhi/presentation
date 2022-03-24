@@ -1,4 +1,9 @@
-import { GET_RECIPES, SET_LOADING, SEARCH_ERROR } from "../types";
+import {
+  GET_RECIPES,
+  SET_LOADING,
+  SEARCH_ERROR,
+  UPDATE_INGREDIENT_LIST,
+} from "../types";
 
 const recipeReducer = (state, action) => {
   switch (action.type) {
@@ -8,6 +13,11 @@ const recipeReducer = (state, action) => {
         recipes: action.payload,
         isLoading: false,
         searchError: null,
+      };
+    case UPDATE_INGREDIENT_LIST:
+      return {
+        ...state,
+        ingredientList: action.payload,
       };
     case SET_LOADING:
       return {

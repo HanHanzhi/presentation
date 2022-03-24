@@ -2,7 +2,12 @@ import React, { useReducer } from "react";
 import axios from "axios";
 import RecipeContext from "./RecipeContext";
 import RecipeReducer from "./RecipeReducer";
-import { GET_RECIPES, SET_LOADING, SEARCH_ERROR } from "../types";
+import {
+  GET_RECIPES,
+  SET_LOADING,
+  SEARCH_ERROR,
+  UPDATE_INGREDIENT_LIST,
+} from "../types";
 
 const RecipeState = (props) => {
   const SPOONACULAR_URI = "https://api.spoonacular.com";
@@ -14,6 +19,7 @@ const RecipeState = (props) => {
   };
   const initialState = {
     recipes: null,
+    ingredientList: [],
     isLoading: false,
     searchError: null,
   };
@@ -21,8 +27,8 @@ const RecipeState = (props) => {
   const [state, dispatch] = useReducer(RecipeReducer, initialState);
 
   // Get recipes by ingredient list
-  const getRecipes = async (ingredients) => {
-    const ingredientsStr = ingredients.join();
+  const getRecipes = async () => {
+    const ingredientsStr = state.ingredientList.join();
     const getRecipeURI = `${SPOONACULAR_URI}/recipes/findByIngredients?apiKey=${QUERY_CONSTANTS.API_KEY}&ingredients=${ingredientsStr}&number=${QUERY_CONSTANTS.RESPONSE_NUM}&ranking=${QUERY_CONSTANTS.RANKING}&ignorePantry=${QUERY_CONSTANTS.IGNORE_PANTRY}`;
 
     try {
@@ -35,6 +41,23 @@ const RecipeState = (props) => {
     }
   };
 
+  // Add to ingredient list
+  const addIngredient = (ingredient) => {
+    if (!state.ingredientList.includes(ingredient))
+      dispatch({
+        type: UPDATE_INGREDIENT_LIST,
+        payload: [...state.ingredientList, ingredient],
+      });
+  };
+
+  // Remove from ingredient list
+  const removeIngredient = (deletedIngredient) => {
+    const newIngredientList = state.ingredientList.filter(
+      (currIngredient) => currIngredient !== deletedIngredient
+    );
+    dispatch({ type: UPDATE_INGREDIENT_LIST, payload: newIngredientList });
+  };
+
   const setLoading = () => {
     dispatch({ type: SET_LOADING });
   };
@@ -43,9 +66,12 @@ const RecipeState = (props) => {
     <RecipeContext.Provider
       value={{
         recipes: state.recipes,
+        ingredientList: state.ingredientList,
         isLoading: state.isLoading,
         searchError: state.searchError,
         getRecipes,
+        addIngredient,
+        removeIngredient,
       }}
     >
       {props.children}

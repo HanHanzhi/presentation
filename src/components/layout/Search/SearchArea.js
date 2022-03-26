@@ -1,14 +1,16 @@
 import React, { useContext } from "react";
 import RecipeContext from "../../../context/recipes/RecipeContext";
+
 import IngredientForm from "./IngredientForm";
+import IngredientList from "./IngredientList";
+import Spinner from "../Spinner";
 
 import styles from "./SearchArea.module.css";
-import IngredientList from "./IngredientList";
 
 const { ingredientSearchContainer, searchBtn } = styles;
 
 const SearchArea = () => {
-  const { getRecipes } = useContext(RecipeContext);
+  const { getRecipes, isLoading } = useContext(RecipeContext);
 
   return (
     <div className={ingredientSearchContainer}>
@@ -17,6 +19,7 @@ const SearchArea = () => {
       <button onClick={getRecipes} className={searchBtn}>
         Search
       </button>
+      {isLoading && <Spinner />}
     </div>
   );
 };

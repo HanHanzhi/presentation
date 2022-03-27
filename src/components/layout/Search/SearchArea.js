@@ -7,10 +7,13 @@ import Spinner from "../Spinner";
 
 import styles from "./SearchArea.module.css";
 
-const { ingredientSearchContainer, searchBtn } = styles;
+const { ingredientSearchContainer, searchBtn , notFound } = styles;
 
 const SearchArea = () => {
-  const { getRecipes, isLoading } = useContext(RecipeContext);
+
+  const { getRecipes , isLoading, recipes} = useContext(RecipeContext);
+
+
 
   return (
     <div className={ingredientSearchContainer}>
@@ -19,9 +22,15 @@ const SearchArea = () => {
       <button onClick={getRecipes} className={searchBtn}>
         Search
       </button>
+
+      {recipes?.length === 0 && (<p className={notFound}>No recipes found!</p>)}
       {isLoading && <Spinner />}
+
+
     </div>
+    
   );
+  
 };
 
 export default SearchArea;

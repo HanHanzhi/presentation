@@ -44,3 +44,12 @@
   padding: 7px 25px;
   border-radius: 10px;
 }
+
+.notFound {
+  color:#DE5151;
+  align-self: center;
+  font-size: 50px;
+  padding-top: 160px;
+  filter: drop-shadow(1px 1px 1px #9f9f9f);
+  
+}

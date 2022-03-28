@@ -46,10 +46,26 @@
 }
 
 .notFound {
-  color:#DE5151;
+  color: #de5151;
   align-self: center;
   font-size: 50px;
   padding-top: 160px;
   filter: drop-shadow(1px 1px 1px #9f9f9f);
-  
+}
+
+.searchBtn:hover {
+  background-color: #dcdcdc;
+}
+
+.searchBtn:active {
+  background-color: #d3d3d3;
+}
+
+.searchBtnDisabled {
+  background-color: #d5d5d5;
+}
+
+.searchBtnDisabled:hover {
+  background-color: #d5d5d5;
+  cursor: not-allowed;
 }

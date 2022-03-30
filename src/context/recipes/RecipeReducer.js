@@ -34,6 +34,7 @@ const recipeReducer = (state, action) => {
       return {
         ...state,
         searchError: action.payload,
+        isLoading: false,
       };
     default:
       return state;

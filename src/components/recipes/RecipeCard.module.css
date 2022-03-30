@@ -1,0 +1,77 @@
+.recipeCardContainer {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 70px;
+}
+
+.recipeCardInfoContainer {
+  width: 750px;
+  position: relative;
+  padding-left: 18px;
+  border-radius: 0 10px 10px 0;
+  background-color: #ebebeb;
+}
+
+.recipeCardInfo {
+  width: 85%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.recipeTitle {
+  font-size: 40px;
+  font-weight: 300;
+}
+
+.recipeImageContainer {
+  position: relative;
+  width: 225px;
+  height: 225px;
+  overflow: hidden;
+  border-radius: 10px 0 0 10px;
+}
+
+.recipeImage {
+  position: absolute;
+  margin: auto;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+
+.recipeIngredientList {
+  display: flex;
+  flex-flow: row wrap;
+  column-gap: 20px;
+  row-gap: 2px;
+  font-size: 20px;
+}
+
+.usedIngredient {
+  color: #1cd22e;
+}
+
+.unusedIngredient {
+  color: red;
+}
+
+.missedIngredient {
+  color: #a5a5a5;
+}
+
+.recipeTime {
+  font-weight: 600;
+  position: absolute;
+  top: 25px;
+  right: 20px;
+}
+
+.recipeLink {
+  position: absolute;
+  color: black;
+  bottom: 25px;
+  right: 20px;
+}

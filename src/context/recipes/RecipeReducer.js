@@ -1,5 +1,6 @@
 import {
   GET_RECIPES,
+  GET_BULK_INFO,
   SET_LOADING,
   SEARCH_ERROR,
   UPDATE_INGREDIENT_LIST,
@@ -11,6 +12,11 @@ const recipeReducer = (state, action) => {
       return {
         ...state,
         recipes: action.payload,
+      };
+    case GET_BULK_INFO:
+      return {
+        ...state,
+        recipesInfo: action.payload,
         isLoading: false,
         searchError: null,
       };

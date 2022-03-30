@@ -3,7 +3,6 @@ import RecipeContext from "../../../context/recipes/RecipeContext";
 
 import IngredientForm from "./IngredientForm";
 import IngredientList from "./IngredientList";
-import Spinner from "../Spinner";
 
 import styles from "./SearchArea.module.css";
 
@@ -29,7 +28,6 @@ const SearchArea = () => {
       </button>
 
       {recipes?.length === 0 && <p className={notFound}>No recipes found!</p>}
-      {isLoading && <Spinner />}
     </div>
   );
 };

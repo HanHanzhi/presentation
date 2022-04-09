@@ -4,6 +4,7 @@ import styles from "./RecipeModal.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUtensils, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faClock, faThumbsUp } from "@fortawesome/free-regular-svg-icons";
+import RecipeSaveBtn from "./RecipeSaveBtn";
 
 const {
   modal,
@@ -21,7 +22,7 @@ const {
   modalStepItem,
 } = styles;
 
-const RecipeModal = ({ isModalShown, setIsModalShown, recipe, recipeInfo }) => {
+const RecipeModal = ({ isModalShown, setIsModalShown, recipeInfo }) => {
   const clickOffModal = (e) => {
     if (e.target.id === "modal-background") {
       e.preventDefault();
@@ -33,7 +34,10 @@ const RecipeModal = ({ isModalShown, setIsModalShown, recipe, recipeInfo }) => {
       <div className={modal} id="modal-background" onClick={clickOffModal}>
         <div className={modalContent}>
           {/* Title */}
-          <p className={modalTitle}>{recipeInfo.title}</p>
+          <div className={modalTitle}>
+            <RecipeSaveBtn recipe={recipeInfo} />
+            <p>{recipeInfo.title}</p>
+          </div>
           <img
             className={modalImage}
             src={recipeInfo.image}

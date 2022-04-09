@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import styles from "./RecipeSaveBtn.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,9 +8,8 @@ import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
 const { recipeBtn, unsavedRecipeBtn, savedRecipeBtn } = styles;
 
 const RecipeSaveBtn = ({ recipe }) => {
-  const isRecipeInStorage = JSON.parse(
-    localStorage.getItem("savedRecipes")
-  )?.includes(recipe.id);
+  const savedLSRecipes = localStorage.getItem("savedRecipes");
+  const isRecipeInStorage = JSON.parse(savedLSRecipes)?.includes(recipe.id);
   const [isRecipeSaved, setIsRecipeSaved] = useState(isRecipeInStorage);
 
   const onRecipeSaveToggle = () => {
@@ -25,6 +24,12 @@ const RecipeSaveBtn = ({ recipe }) => {
     localStorage.setItem("savedRecipes", JSON.stringify(savedRecipes));
     setIsRecipeSaved(!isRecipeSaved);
   };
+
+  useEffect(() => {
+    setIsRecipeSaved(
+      JSON.parse(localStorage.getItem("savedRecipes"))?.includes(recipe.id)
+    );
+  }, [recipe.id, savedLSRecipes]);
 
   return (
     <button

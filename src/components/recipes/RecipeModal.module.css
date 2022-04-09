@@ -42,6 +42,7 @@
 }
 
 .modalTitle {
+  display: flex;
   font-size: 45px;
   font-weight: 300;
   text-decoration: underline;

@@ -117,7 +117,6 @@ const RecipeCard = ({ recipe, idx, isSavedScreen }) => {
       <RecipeModal
         isModalShown={isModalShown}
         setIsModalShown={setIsModalShown}
-        recipe={recipe}
         recipeInfo={!isSavedScreen ? recipesInfo[idx] : savedRecipesArr[idx]}
       />
     </>

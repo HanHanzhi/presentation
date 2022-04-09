@@ -5,6 +5,7 @@ import RecipeReducer from "./RecipeReducer";
 import {
   GET_RECIPES,
   GET_BULK_INFO,
+  GET_SAVED_RECIPES,
   SET_LOADING,
   SEARCH_ERROR,
   UPDATE_INGREDIENT_LIST,
@@ -22,6 +23,7 @@ const RecipeState = (props) => {
   const initialState = {
     recipes: null,
     recipesInfo: null,
+    savedRecipesArr: null,
     ingredientList: [],
     isLoading: false,
     searchError: null,
@@ -67,6 +69,19 @@ const RecipeState = (props) => {
     dispatch({ type: UPDATE_INGREDIENT_LIST, payload: newIngredientList });
   };
 
+  const getSavedRecipes = async (savedRecipeIds) => {
+    const recipeIdsStr = savedRecipeIds.join();
+    const getBulkURI = `${SPOONACULAR_URI}/recipes/informationBulk?apiKey=${QUERY_CONSTANTS.API_KEY}&ids=${recipeIdsStr}&includeNutrition=${QUERY_CONSTANTS.INCLUDE_NUTRITION}`;
+    try {
+      setLoading();
+      const res = await axios.get(getBulkURI);
+      dispatch({ type: GET_SAVED_RECIPES, payload: res.data });
+    } catch (err) {
+      console.error(err.response);
+      dispatch({ type: SEARCH_ERROR, payload: err.response.data.message });
+    }
+  };
+
   const setLoading = () => {
     dispatch({ type: SET_LOADING });
   };
@@ -76,10 +91,12 @@ const RecipeState = (props) => {
       value={{
         recipes: state.recipes,
         recipesInfo: state.recipesInfo,
+        savedRecipesArr: state.savedRecipesArr,
         ingredientList: state.ingredientList,
         isLoading: state.isLoading,
         searchError: state.searchError,
         getRecipes,
+        getSavedRecipes,
         addIngredient,
         removeIngredient,
       }}

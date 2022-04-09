@@ -1,5 +1,6 @@
 export const GET_RECIPES = "GET_RECIPES";
 export const GET_BULK_INFO = "GET_BULK_INFO";
+export const GET_SAVED_RECIPES = "GET_SAVED_RECIPES";
 
 export const SET_LOADING = "SET_LOADING";
 export const SEARCH_ERROR = "SEARCH_ERROR";

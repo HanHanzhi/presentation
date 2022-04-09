@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import styles from "./Navbar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,8 +6,7 @@ import { faHouse, faBoxArchive } from "@fortawesome/free-solid-svg-icons";
 
 const { navContainer, navIcon, navBtnEnabled, navBtnDisabled } = styles;
 
-const Navbar = () => {
-  const [isHomeSelected, setIsHomeSelected] = useState(true);
+const Navbar = ({ isHomeSelected, setIsHomeSelected }) => {
   return (
     <div className={navContainer}>
       <button

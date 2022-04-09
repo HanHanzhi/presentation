@@ -1,0 +1,14 @@
+.recipeBtn {
+  font-size: 30px;
+  justify-self: flex-end;
+  margin-left: 15px;
+}
+
+.savedRecipeBtn,
+.unsavedRecipeBtn:hover {
+  color: #1cd22e;
+}
+
+.savedRecipeBtn:hover {
+  color: #8ceb95;
+}

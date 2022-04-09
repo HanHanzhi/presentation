@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import RecipeContext from "../../context/recipes/RecipeContext";
+import RecipeSaveBtn from "./RecipeSaveBtn";
 import RecipeModal from "./RecipeModal";
 
 import styles from "./RecipeCard.module.css";
@@ -21,8 +22,8 @@ const {
   recipeLink,
 } = styles;
 
-const RecipeCard = ({ recipe, idx }) => {
-  const { recipesInfo } = useContext(RecipeContext);
+const RecipeCard = ({ recipe, idx, isSavedScreen }) => {
+  const { recipesInfo, savedRecipesArr } = useContext(RecipeContext);
   const { image, title } = recipe;
 
   const [isModalShown, setIsModalShown] = useState(false);
@@ -41,27 +42,39 @@ const RecipeCard = ({ recipe, idx }) => {
         </div>
         <div className={recipeCardInfoContainer}>
           <div className={recipeCardInfo}>
-            <p className={recipeTitle}>{title}</p>
-            <div className={recipeIngredientList}>
-              {recipe.usedIngredients.map((ingredient) => (
-                <p key={ingredient.id} className={usedIngredient}>
-                  {ingredient.name}
-                </p>
-              ))}
-              {recipe.unusedIngredients.map((ingredient) => (
-                <p key={ingredient.id} className={unusedIngredient}>
-                  {ingredient.name}
-                </p>
-              ))}
-              {recipe.missedIngredients.map((ingredient) => (
-                <p key={ingredient.id} className={missedIngredient}>
-                  {ingredient.name}
-                </p>
-              ))}
+            <div className={recipeTitle}>
+              <p>{title}</p>
+              <RecipeSaveBtn recipe={recipe} />
             </div>
+            {!isSavedScreen && (
+              <div className={recipeIngredientList}>
+                {recipe.usedIngredients.map((ingredient) => (
+                  <p key={ingredient.id} className={usedIngredient}>
+                    {ingredient.name}
+                  </p>
+                ))}
+                {recipe.unusedIngredients.map((ingredient) => (
+                  <p key={ingredient.id} className={unusedIngredient}>
+                    {ingredient.name}
+                  </p>
+                ))}
+                {recipe.missedIngredients.map((ingredient) => (
+                  <p key={ingredient.id} className={missedIngredient}>
+                    {ingredient.name}
+                  </p>
+                ))}
+              </div>
+            )}
             <p>
-              {recipesInfo
-                ? `${recipesInfo[idx].summary
+              {!isSavedScreen
+                ? recipesInfo
+                  ? `${recipesInfo[idx].summary
+                      .replaceAll(/<[^>]*>/g, "")
+                      .slice(0, 250)
+                      .trim()}...`
+                  : "N/A"
+                : savedRecipesArr
+                ? `${savedRecipesArr[idx].summary
                     .replaceAll(/<[^>]*>/g, "")
                     .slice(0, 250)
                     .trim()}...`
@@ -69,14 +82,29 @@ const RecipeCard = ({ recipe, idx }) => {
             </p>
           </div>
           <p className={recipeTime}>
-            {recipesInfo ? recipesInfo[idx].readyInMinutes : "--"} mins
+            {!isSavedScreen
+              ? recipesInfo
+                ? recipesInfo[idx].readyInMinutes
+                : "--"
+              : savedRecipesArr
+              ? savedRecipesArr[idx].readyInMinutes
+              : "--"}{" "}
+            mins
           </p>
           <a
             className={recipeLink}
             id="ignore-modal"
             rel="noreferrer"
             target="_blank"
-            href={recipesInfo ? recipesInfo[idx].spoonacularSourceUrl : "#"}
+            href={
+              !isSavedScreen
+                ? recipesInfo
+                  ? recipesInfo[idx].spoonacularSourceUrl
+                  : "#"
+                : savedRecipesArr
+                ? savedRecipesArr[idx].spoonacularSourceUrl
+                : "#"
+            }
           >
             <FontAwesomeIcon
               id="ignore-modal"
@@ -90,7 +118,7 @@ const RecipeCard = ({ recipe, idx }) => {
         isModalShown={isModalShown}
         setIsModalShown={setIsModalShown}
         recipe={recipe}
-        recipeInfo={recipesInfo[idx]}
+        recipeInfo={!isSavedScreen ? recipesInfo[idx] : savedRecipesArr[idx]}
       />
     </>
   );

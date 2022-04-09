@@ -58,22 +58,31 @@ const RecipeModal = ({ isModalShown, setIsModalShown, recipe, recipeInfo }) => {
           <div className={modalRecipeContainer}>
             <span className={modalRecipeTag}>Ingredients:</span>
             <ul className={modalIngredientsList}>
-              {recipeInfo.extendedIngredients?.map((ingredient) => (
-                <li key={ingredient.id} className={modalIngredientItem}>
-                  {ingredient.original}
-                </li>
-              ))}
+              {!recipeInfo.extendedIngredients
+                ? "No ingredients found"
+                : recipeInfo.extendedIngredients?.map((ingredient) => (
+                    <li
+                      key={`${ingredient.id} ${ingredient.original}`}
+                      className={modalIngredientItem}
+                    >
+                      {ingredient.original}
+                    </li>
+                  ))}
             </ul>
           </div>
           {/* Recipe Steps */}
           <div className={modalRecipeContainer}>
             <span className={modalRecipeTag}>Steps:</span>
             <ul className={modalStepsList}>
-              {recipeInfo.analyzedInstructions[0].steps.map((step, stepIdx) => (
-                <li key={stepIdx} className={modalStepItem}>
-                  {step.step}
-                </li>
-              ))}
+              {recipeInfo.analyzedInstructions?.length === 0
+                ? "No steps found"
+                : recipeInfo.analyzedInstructions[0].steps.map(
+                    (step, stepIdx) => (
+                      <li key={stepIdx} className={modalStepItem}>
+                        {step.step}
+                      </li>
+                    )
+                  )}
             </ul>
           </div>
           {/* Close Modal Button */}

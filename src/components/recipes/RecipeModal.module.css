@@ -1,0 +1,104 @@
+/* The Modal (background) */
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* The Modal (content) */
+.modalContent {
+  position: relative;
+  width: 85%;
+  height: 85%;
+  padding: 4rem 2rem 1rem 2rem;
+  background-color: white;
+  color: #264653;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: scroll;
+  font-size: 30px;
+}
+
+.closeButton {
+  position: absolute;
+  font-size: 2.8rem;
+  padding-right: 1rem;
+  color: #5c5c5c;
+  top: 0;
+  right: 0;
+}
+
+.closeButton:hover {
+  color: red;
+}
+
+.modalTitle {
+  font-size: 45px;
+  font-weight: 300;
+  text-decoration: underline;
+  margin-bottom: 20px;
+}
+
+.modalImage {
+  width: 335px;
+  border-radius: 10px;
+  margin-bottom: 45px;
+}
+
+.modalStats {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 90px;
+}
+
+.modalStatsItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border: 1px solid black;
+  font-size: 25px;
+  padding: 10px 5px;
+}
+
+.modalRecipeContainer {
+  display: flex;
+  align-self: flex-start;
+  margin-bottom: 100px;
+}
+
+.modalRecipeTag {
+  font-weight: 700;
+  text-align: right;
+  min-width: 161.4px;
+  margin-right: 100px;
+}
+
+.modalIngredientsList {
+  margin-left: 24px;
+}
+
+.modalIngredientItem {
+  list-style: circle;
+}
+
+.modalStepsList {
+  margin-left: 43px;
+}
+
+.modalStepItem {
+  list-style: decimal;
+}
+
+.modalStepItem::marker {
+  font-weight: 100;
+  font-size: 40px;
+}

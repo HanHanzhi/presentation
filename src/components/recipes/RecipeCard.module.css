@@ -4,6 +4,10 @@
   margin-bottom: 70px;
 }
 
+.recipeCardContainer:hover {
+  cursor: pointer;
+}
+
 .recipeCardInfoContainer {
   width: 750px;
   position: relative;
@@ -74,4 +78,10 @@
   color: black;
   bottom: 25px;
   right: 20px;
+  transition: font-size 50ms ease-in;
+}
+
+.recipeLink:hover {
+  color: #1ab129;
+  font-size: 20px;
 }

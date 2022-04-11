@@ -28,7 +28,7 @@ const IngredientForm = () => {
         type="text"
         name="ingredient-search"
         className={ingredientSearch}
-        placeholder="Search ingraedeients..."
+        placeholder="Search ingredients..."
         value={ingredientText}
         onChange={(e) => setIngredientText(e.target.value)}
       />

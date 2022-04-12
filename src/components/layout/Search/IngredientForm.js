@@ -21,7 +21,7 @@ const IngredientForm = () => {
 
   const onAddIngredient = (e) => {
     e.preventDefault();
-    addIngredient(ingredientText);
+    if (ingredientText.trim().length > 0) addIngredient(ingredientText);
     setIngredientText("");
   };
 
@@ -44,15 +44,16 @@ const IngredientForm = () => {
             autocompleteResults?.length > 0 ? autocompleteSearch : ""
           }`}
           placeholder="Search ingredients..."
+          maxLength="50"
           value={ingredientText}
           onChange={onFormChange}
         />
         <button
           type="submit"
           className={`${ingredientSubmitBtn} ${
-            ingredientText === "" ? disabled : ""
+            ingredientText.trim().length === 0 ? disabled : ""
           }`}
-          disabled={ingredientText === ""}
+          disabled={ingredientText.trim().length === 0}
         >
           <FontAwesomeIcon icon={faPlus} size="2x" />
         </button>

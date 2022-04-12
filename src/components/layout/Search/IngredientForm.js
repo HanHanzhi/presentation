@@ -1,16 +1,23 @@
 import React, { useState, useContext } from "react";
 import RecipeContext from "../../../context/recipes/RecipeContext";
+import AutocompleteResults from "./AutocompleteResults";
 
 import styles from "./SearchArea.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
-const { ingredientSearch, ingredientForm, ingredientSubmitBtn, disabled } =
-  styles;
+const {
+  ingredientSearch,
+  ingredientForm,
+  ingredientSubmitBtn,
+  autocompleteSearch,
+  disabled,
+} = styles;
 
 const IngredientForm = () => {
   const [ingredientText, setIngredientText] = useState("");
-  const { addIngredient } = useContext(RecipeContext);
+  const { addIngredient, getAutocompleteResults, autocompleteResults } =
+    useContext(RecipeContext);
 
   const onAddIngredient = (e) => {
     e.preventDefault();
@@ -18,30 +25,40 @@ const IngredientForm = () => {
     setIngredientText("");
   };
 
+  const onFormChange = (e) => {
+    setIngredientText(e.target.value);
+    getAutocompleteResults(e.target.value);
+  };
+
   return (
-    <form
-      className={ingredientForm}
-      onSubmit={(e) => onAddIngredient(e)}
-      autoComplete="off"
-    >
-      <input
-        type="text"
-        name="ingredient-search"
-        className={ingredientSearch}
-        placeholder="Search ingredients..."
-        value={ingredientText}
-        onChange={(e) => setIngredientText(e.target.value)}
-      />
-      <button
-        type="submit"
-        className={`${ingredientSubmitBtn} ${
-          ingredientText === "" ? disabled : ""
-        }`}
-        disabled={ingredientText === ""}
+    <>
+      <form
+        className={ingredientForm}
+        onSubmit={(e) => onAddIngredient(e)}
+        autoComplete="off"
       >
-        <FontAwesomeIcon icon={faPlus} size="2x" />
-      </button>
-    </form>
+        <input
+          type="text"
+          name="ingredient-search"
+          className={`${ingredientSearch} ${
+            autocompleteResults?.length > 0 ? autocompleteSearch : ""
+          }`}
+          placeholder="Search ingredients..."
+          value={ingredientText}
+          onChange={onFormChange}
+        />
+        <button
+          type="submit"
+          className={`${ingredientSubmitBtn} ${
+            ingredientText === "" ? disabled : ""
+          }`}
+          disabled={ingredientText === ""}
+        >
+          <FontAwesomeIcon icon={faPlus} size="2x" />
+        </button>
+      </form>
+      <AutocompleteResults setIngredientText={setIngredientText} />
+    </>
   );
 };
 

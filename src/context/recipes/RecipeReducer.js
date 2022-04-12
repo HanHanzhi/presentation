@@ -1,4 +1,6 @@
 import {
+  GET_AUTOCOMPLETE_RESULTS,
+  CLEAR_AUTOCOMPLETE,
   GET_RECIPES,
   GET_BULK_INFO,
   GET_SAVED_RECIPES,
@@ -10,6 +12,18 @@ import {
 
 const recipeReducer = (state, action) => {
   switch (action.type) {
+    case GET_AUTOCOMPLETE_RESULTS:
+      return {
+        ...state,
+        autocompleteResults: action.payload,
+        searchError: null,
+      };
+    case CLEAR_AUTOCOMPLETE:
+      return {
+        ...state,
+        autocompleteResults: [],
+        searchError: null,
+      };
     case GET_RECIPES:
       return {
         ...state,

@@ -21,6 +21,10 @@
   border-radius: 10px 0 0 10px;
 }
 
+.autocompleteSearch {
+  border-radius: 10px 0 0 0;
+}
+
 .ingredientSubmitBtn {
   color: white;
   background-color: #1cd22e;

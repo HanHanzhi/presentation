@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import RecipeContext from "../../../context/recipes/RecipeContext";
-
 import IngredientForm from "./IngredientForm";
 import IngredientList from "./IngredientList";
 

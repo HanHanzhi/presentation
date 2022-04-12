@@ -3,6 +3,8 @@ import axios from "axios";
 import RecipeContext from "./RecipeContext";
 import RecipeReducer from "./RecipeReducer";
 import {
+  GET_AUTOCOMPLETE_RESULTS,
+  CLEAR_AUTOCOMPLETE,
   GET_RECIPES,
   GET_BULK_INFO,
   GET_SAVED_RECIPES,
@@ -22,6 +24,7 @@ const RecipeState = (props) => {
     INCLUDE_NUTRITION: false, // Include nutrition data to the recipe information
   };
   const initialState = {
+    autocompleteResults: null,
     recipes: null,
     recipesInfo: null,
     savedRecipesArr: null,
@@ -32,6 +35,24 @@ const RecipeState = (props) => {
   };
 
   const [state, dispatch] = useReducer(RecipeReducer, initialState);
+
+  // Get autocompleted results
+  const getAutocompleteResults = async (queryText) => {
+    const autocompleteURI = `${SPOONACULAR_URI}/food/ingredients/autocomplete?apiKey=${QUERY_CONSTANTS.API_KEY}&query=${queryText}&number=5&metaInformation=false`;
+
+    try {
+      const res = await axios.get(autocompleteURI);
+      dispatch({ type: GET_AUTOCOMPLETE_RESULTS, payload: res.data });
+    } catch (err) {
+      console.error(err.response);
+      dispatch({ type: SEARCH_ERROR, payload: err.response.data.message });
+    }
+  };
+
+  // Clear autocomplete results
+  const clearAutocomplete = () => {
+    dispatch({ type: CLEAR_AUTOCOMPLETE });
+  };
 
   // Get recipes by ingredient list
   const getRecipes = async () => {
@@ -113,6 +134,7 @@ const RecipeState = (props) => {
   return (
     <RecipeContext.Provider
       value={{
+        autocompleteResults: state.autocompleteResults,
         recipes: state.recipes,
         recipesInfo: state.recipesInfo,
         savedRecipesArr: state.savedRecipesArr,
@@ -120,6 +142,8 @@ const RecipeState = (props) => {
         alternateIngredients: state.alternateIngredients,
         isLoading: state.isLoading,
         searchError: state.searchError,
+        getAutocompleteResults,
+        clearAutocomplete,
         getRecipes,
         getSavedRecipes,
         getAlternateIngredient,

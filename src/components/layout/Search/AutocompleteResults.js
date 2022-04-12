@@ -6,12 +6,15 @@ import styles from "./AutocompleteResults.module.css";
 const { autocomplete } = styles;
 
 const AutocompleteResults = ({ setIngredientText }) => {
-  const { autocompleteResults, clearAutocomplete } = useContext(RecipeContext);
+  const { autocompleteResults, clearAutocomplete, addIngredient } =
+    useContext(RecipeContext);
 
-  const onAutoComplete = (autocompleteText) => {
-    setIngredientText(autocompleteText);
+  const onAutocomplete = (ingredientText) => {
+    setIngredientText("");
+    addIngredient(ingredientText);
     clearAutocomplete();
   };
+
   return (
     autocompleteResults?.length > 0 && (
       <div>
@@ -19,7 +22,7 @@ const AutocompleteResults = ({ setIngredientText }) => {
           <div
             className={autocomplete}
             key={autocompleteItem.name}
-            onClick={() => onAutoComplete(autocompleteItem.name)}
+            onClick={() => onAutocomplete(autocompleteItem.name)}
           >
             {autocompleteItem.name}
           </div>

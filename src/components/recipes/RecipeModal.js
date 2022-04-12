@@ -1,10 +1,11 @@
 import React from "react";
+import RecipeSaveBtn from "./RecipeSaveBtn";
+import IngredientText from "./IngredientText";
 
 import styles from "./RecipeModal.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUtensils, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faClock, faThumbsUp } from "@fortawesome/free-regular-svg-icons";
-import RecipeSaveBtn from "./RecipeSaveBtn";
 
 const {
   modal,
@@ -17,7 +18,6 @@ const {
   modalRecipeContainer,
   modalRecipeTag,
   modalIngredientsList,
-  modalIngredientItem,
   modalStepsList,
   modalStepItem,
 } = styles;
@@ -65,12 +65,12 @@ const RecipeModal = ({ isModalShown, setIsModalShown, recipeInfo }) => {
               {!recipeInfo.extendedIngredients
                 ? "No ingredients found"
                 : recipeInfo.extendedIngredients?.map((ingredient) => (
-                    <li
+                    <IngredientText
                       key={`${ingredient.id} ${ingredient.original}`}
-                      className={modalIngredientItem}
+                      ingredientID={ingredient.id}
                     >
                       {ingredient.original}
-                    </li>
+                    </IngredientText>
                   ))}
             </ul>
           </div>

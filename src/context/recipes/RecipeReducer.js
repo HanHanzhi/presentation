@@ -2,6 +2,7 @@ import {
   GET_RECIPES,
   GET_BULK_INFO,
   GET_SAVED_RECIPES,
+  GET_ALTERNATE_INGREDIENT,
   SET_LOADING,
   SEARCH_ERROR,
   UPDATE_INGREDIENT_LIST,
@@ -26,6 +27,15 @@ const recipeReducer = (state, action) => {
         ...state,
         savedRecipesArr: action.payload,
         isLoading: false,
+        searchError: null,
+      };
+    case GET_ALTERNATE_INGREDIENT:
+      return {
+        ...state,
+        alternateIngredients: {
+          ...state.alternateIngredients,
+          [action.payload[0]]: action.payload[1].substitutes[0],
+        },
         searchError: null,
       };
     case UPDATE_INGREDIENT_LIST:

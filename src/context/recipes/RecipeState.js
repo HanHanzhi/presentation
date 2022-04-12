@@ -6,6 +6,7 @@ import {
   GET_RECIPES,
   GET_BULK_INFO,
   GET_SAVED_RECIPES,
+  GET_ALTERNATE_INGREDIENT,
   SET_LOADING,
   SEARCH_ERROR,
   UPDATE_INGREDIENT_LIST,
@@ -25,6 +26,7 @@ const RecipeState = (props) => {
     recipesInfo: null,
     savedRecipesArr: null,
     ingredientList: [],
+    alternateIngredients: {}, // ID (NUMBER) : Alternate Ingredient (STRING)
     isLoading: false,
     searchError: null,
   };
@@ -69,6 +71,7 @@ const RecipeState = (props) => {
     dispatch({ type: UPDATE_INGREDIENT_LIST, payload: newIngredientList });
   };
 
+  // Get information on local storage saved recipes
   const getSavedRecipes = async (savedRecipeIds) => {
     const recipeIdsStr = savedRecipeIds.join();
     const getBulkURI = `${SPOONACULAR_URI}/recipes/informationBulk?apiKey=${QUERY_CONSTANTS.API_KEY}&ids=${recipeIdsStr}&includeNutrition=${QUERY_CONSTANTS.INCLUDE_NUTRITION}`;
@@ -76,6 +79,27 @@ const RecipeState = (props) => {
       setLoading();
       const res = await axios.get(getBulkURI);
       dispatch({ type: GET_SAVED_RECIPES, payload: res.data });
+    } catch (err) {
+      console.error(err.response);
+      dispatch({ type: SEARCH_ERROR, payload: err.response.data.message });
+    }
+  };
+
+  // Get alternate ingredient from ingredient ID
+  const getAlternateIngredient = async (ingredientID) => {
+    // If alternate ingredient has already been found
+    if (ingredientID in state.alternateIngredients) return;
+
+    const getAlternateURI = `${SPOONACULAR_URI}/food/ingredients/${ingredientID}/substitutes?apiKey=${QUERY_CONSTANTS.API_KEY}`;
+
+    try {
+      const res = await axios.get(getAlternateURI);
+      if (res.data.status === "success") {
+        dispatch({
+          type: GET_ALTERNATE_INGREDIENT,
+          payload: [ingredientID, res.data],
+        });
+      }
     } catch (err) {
       console.error(err.response);
       dispatch({ type: SEARCH_ERROR, payload: err.response.data.message });
@@ -93,10 +117,12 @@ const RecipeState = (props) => {
         recipesInfo: state.recipesInfo,
         savedRecipesArr: state.savedRecipesArr,
         ingredientList: state.ingredientList,
+        alternateIngredients: state.alternateIngredients,
         isLoading: state.isLoading,
         searchError: state.searchError,
         getRecipes,
         getSavedRecipes,
+        getAlternateIngredient,
         addIngredient,
         removeIngredient,
       }}

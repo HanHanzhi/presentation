@@ -16,12 +16,17 @@ const {
 
 const IngredientForm = () => {
   const [ingredientText, setIngredientText] = useState("");
-  const { addIngredient, getAutocompleteResults, autocompleteResults } =
-    useContext(RecipeContext);
+  const {
+    addIngredient,
+    getAutocompleteResults,
+    autocompleteResults,
+    clearAutocomplete,
+  } = useContext(RecipeContext);
 
   const onAddIngredient = (e) => {
     e.preventDefault();
     if (ingredientText.trim().length > 0) addIngredient(ingredientText);
+    clearAutocomplete();
     setIngredientText("");
   };
 

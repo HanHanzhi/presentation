@@ -17,7 +17,7 @@ import {
 const RecipeState = (props) => {
   const SPOONACULAR_URI = "https://api.spoonacular.com";
   const QUERY_CONSTANTS = {
-    API_KEY: "a7dd53920d654051aea0cf45bf40c70f",
+    API_KEY: "219c31f1074547919cafe2983f0d803d",
     RESPONSE_NUM: 5,
     RANKING: 1, // Maximize used ingredients (1) or minimize missing ingredients (2)
     IGNORE_PANTRY: false,
